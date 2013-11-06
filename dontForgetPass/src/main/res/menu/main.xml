@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Edit Item. -->
+    <item android:id="@+id/action_edit_item"
+        android:title="@string/action_edit_menu"
+        android:showAsAction="ifRoom" />
+
+    <!-- Delete Item. -->
+    <item android:id="@+id/action_delete_item"
+        android:title="@string/action_delete_menu"
+        android:showAsAction="ifRoom" />
+</menu>

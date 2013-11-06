@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dont Forget</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!--
+    TextViews
+    -->
+    <string name="no_pass">You have not added any password</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="txt_user_test">Usuario lhernandez@4geeks.com.ve</string>
+    <string name="txt_pass_test">Clave 19419772</string>
+    <string name="txt_create_at">Registro creado el 24 de diciembre a las 11:44pm</string>
+
+    <!--
+    Actions(menu item)
+    -->
+    <string name="action_add_item">Add item</string>
+    <string name="action_edit_menu">Editar tarjeta</string>
+    <string name="action_delete_menu">Eliminar tarjeta</string>
+    <string name="action_settings">Settings</string>
+</resources>

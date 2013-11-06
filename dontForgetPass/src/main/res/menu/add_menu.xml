@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dontForgetPass="http://schemas.android.com/apk/res-auto">
+    <!-- Adds an item to the list. -->
+    <item android:id="@+id/search"
+        android:title="titulo"
+        android:icon="@drawable/ic_menu_search_holo_light"
+        dontForgetPass:showAsAction="collapseActionView|ifRoom"
+        dontForgetPass:actionViewClass="android.widget.SearchView" />
+    <item android:id="@+id/action_add_item"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light"
+        dontForgetPass:showAsAction="ifRoom" />
+
+
+</menu>
