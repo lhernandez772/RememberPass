@@ -2,20 +2,30 @@
     android:layout_width="match_parent"
     android:background="#e8e8e8"
     android:layout_height="match_parent">
-
     <ScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scroll">
 
-
-        <LinearLayout android:id="@+id/container"
-            android:background="#e8e8e8"
-            android:layout_width="match_parent"
+        <!--
+            Contenedor principal
+        -->
+        <LinearLayout
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:showDividers="middle"
-            android:animateLayoutChanges="true"
+            android:layout_width="match_parent"
             android:paddingLeft="9dp"
-            android:paddingRight="9dp" />
+            android:paddingRight="9dp">
+
+            <LinearLayout android:id="@+id/container"
+                android:background="#e8e8e8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                android:animateLayoutChanges="true">
+            </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 
