@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Dont-Forget.iml" filepath="$PROJECT_DIR$/Dont-Forget.iml" />
       <module fileurl="file://$PROJECT_DIR$/dontForgetPass/dontForgetPass.iml" filepath="$PROJECT_DIR$/dontForgetPass/dontForgetPass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dontForgetPassProject.iml" filepath="$PROJECT_DIR$/dontForgetPassProject.iml" />
     </modules>
   </component>
 </project>

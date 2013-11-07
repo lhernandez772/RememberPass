@@ -81,7 +81,6 @@ public class MainActivity extends ActionBarActivity {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (mItemPressed) {
-                            // Multi-item swipes not handled
                             return false;
                         }
                         mItemPressed = true;
@@ -90,78 +89,55 @@ public class MainActivity extends ActionBarActivity {
                     case MotionEvent.ACTION_CANCEL:
                         v.setAlpha(1);
                         v.setTranslationX(0);
+                        mSwiping = false;
                         mItemPressed = false;
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        {
+                    {
+                        float x = event.getX() + v.getTranslationX();
+                        float deltaX = x - mDownX;
+                        float deltaXAbs = Math.abs(deltaX);
+                        if (!mSwiping) {
+                            if (deltaXAbs > mSwipeSlop) {
+                                mSwiping = true;
+                                scroll.requestDisallowInterceptTouchEvent(true);
+                            }
+                        }
+                        if (mSwiping) {
+                            v.setTranslationX((x - mDownX));
+                            v.setAlpha(1 - deltaXAbs / v.getWidth());
+                        }
+                    }
+                    break;
+
+                    case MotionEvent.ACTION_UP:
+                    {
+                        if (mSwiping) {
                             float x = event.getX() + v.getTranslationX();
                             float deltaX = x - mDownX;
                             float deltaXAbs = Math.abs(deltaX);
-                            if (!mSwiping) {
-                                if (deltaXAbs > mSwipeSlop) {
-                                    mSwiping = true;
-                                    scroll.requestDisallowInterceptTouchEvent(true);
-                                }
-                            }
-                            if (mSwiping) {
-                                v.setTranslationX((x - mDownX));
-                                v.setAlpha(1 - deltaXAbs / v.getWidth());
+
+                            if (deltaXAbs > v.getWidth() / 4) {
+                                mContainerView.invalidate();
+                                v.animate().setDuration(150).translationX(1000).alphaBy(0);
+                                mContainerView.removeView(v);
+
+                                //  v.setVisibility(View.GONE);
+
+                            } else {
+                                v.animate().setDuration(150).translationX(0);
+                                mSwiping = false;
                             }
                         }
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        {
-                            Toast toast2 = Toast.makeText(c, Boolean.toString(mSwiping), Toast.LENGTH_LONG);
-                            toast2.show();
-                            if (mSwiping) {
-                                float x = event.getX() + v.getTranslationX();
-                                float deltaX = x - mDownX;
-                                float deltaXAbs = Math.abs(deltaX);
-                                //Toast toast = Toast.makeText(c, Float.toString(deltaXAbs)+"<==>"+Float.toString(v.getWidth()/4), Toast.LENGTH_LONG);
-                                //toast.show();
-                                if (deltaXAbs > v.getWidth() / 4) {
-                                    mContainerView.invalidate();
-                                    v.animate().setDuration(150).translationX(1000).alphaBy(0);
-                                    mContainerView.removeView(v);
-                                  //  v.setVisibility(View.GONE);
-
-                                }
-                            }
-                            else {
-                                v.setTranslationX(0);
-                            }
-                            mItemPressed = false;
-                            //scroll.requestDisallowInterceptTouchEvent(false);
-                        }
-                        break;
+                        mItemPressed = false;
+                    }
+                    break;
                 }
 
                 return true;
             }
         };
-        //Onclick para cada icono de menu
-        newView.findViewById(R.id.action_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(c, v);
-                MenuInflater inflater = popup.getMenuInflater();
-                inflater.inflate(R.menu.main, popup.getMenu());
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_delete_item:
-                                mContainerView.removeView(newView);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-                popup.show();
-            }
-        });
+
         newView.setOnTouchListener(mTouchListener);
         mContainerView.addView(newView, 0);
     }
