@@ -1,32 +1,22 @@
 package com.example.dontforgetpass;
-
-import android.app.SearchManager;
 import android.content.Context;
-import android.opengl.Visibility;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
     private ViewGroup mContainerView;
-    static ScrollView scroll;
+    private static ScrollView scroll;
+    private final int TIME_ANIM = 150;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +34,6 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.add_menu, menu);
-
         return true;
     }
 
@@ -68,21 +57,16 @@ public class MainActivity extends ActionBarActivity {
         View.OnTouchListener mTouchListener = new View.OnTouchListener() {
             private int mSwipeSlop = -1;
             float mDownX = 0;
-            boolean mItemPressed = false;
-            boolean mSwiping = false;
-
+            boolean mItemPressed = false, mSwiping = false;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //Variables del Ontouch
-                if (mSwipeSlop < 0) {
-                    mSwipeSlop = ViewConfiguration.get(c).
-                            getScaledTouchSlop();
-                }
+                if (mSwipeSlop < 0)
+                    mSwipeSlop = ViewConfiguration.get(c).getScaledTouchSlop();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if (mItemPressed) {
+                        if (mItemPressed)
                             return false;
-                        }
                         mItemPressed = true;
                         mDownX = event.getX();
                         break;
@@ -117,15 +101,13 @@ public class MainActivity extends ActionBarActivity {
                             float deltaX = x - mDownX;
                             float deltaXAbs = Math.abs(deltaX);
 
+                            // Si voy mas alla que lo deseado el elemento se borra
                             if (deltaXAbs > v.getWidth() / 4) {
                                 mContainerView.invalidate();
-                                v.animate().setDuration(150).translationX(1000).alphaBy(0);
+                                v.animate().setDuration(TIME_ANIM).translationX(1000).alphaBy(0);
                                 mContainerView.removeView(v);
-
-                                //  v.setVisibility(View.GONE);
-
                             } else {
-                                v.animate().setDuration(150).translationX(0);
+                                v.animate().setDuration(TIME_ANIM).translationX(0);
                                 mSwiping = false;
                             }
                         }
@@ -137,7 +119,6 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             }
         };
-
         newView.setOnTouchListener(mTouchListener);
         mContainerView.addView(newView, 0);
     }
