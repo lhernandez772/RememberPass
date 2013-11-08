@@ -53,65 +53,62 @@ public class MainActivity extends ActionBarActivity {
                 R.layout.list_item_example, mContainerView, false);
         final Context c = newView.getContext();
         ((TextView) newView.findViewById(android.R.id.text1)).setText(
-                COUNTRIES[(int) (Math.random() * COUNTRIES.length)]);
+                PASS[(int) (Math.random() * PASS.length)]);
         View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-            private int mSwipeSlop = -1;
-            float mDownX = 0;
-            boolean mItemPressed = false, mSwiping = false;
+            private int swipe = -1;
+            float pressX = 0;
+            boolean itemPress = false, dragging = false;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //Variables del Ontouch
-                if (mSwipeSlop < 0)
-                    mSwipeSlop = ViewConfiguration.get(c).getScaledTouchSlop();
+                if (swipe < 0)
+                    swipe = ViewConfiguration.get(c).getScaledTouchSlop();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if (mItemPressed)
+                        if (itemPress)
                             return false;
-                        mItemPressed = true;
-                        mDownX = event.getX();
+                        itemPress = true;
+                        pressX = event.getX();
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         v.setAlpha(1);
                         v.setTranslationX(0);
-                        mSwiping = false;
-                        mItemPressed = false;
+                        dragging = false;
+                        itemPress = false;
                         break;
                     case MotionEvent.ACTION_MOVE:
                     {
                         float x = event.getX() + v.getTranslationX();
-                        float deltaX = x - mDownX;
-                        float deltaXAbs = Math.abs(deltaX);
-                        if (!mSwiping) {
-                            if (deltaXAbs > mSwipeSlop) {
-                                mSwiping = true;
+                        float deltaX = x - pressX;
+                        if (!dragging) {
+                            if (Math.abs(deltaX) > swipe) {
+                                dragging = true;
                                 scroll.requestDisallowInterceptTouchEvent(true);
                             }
                         }
-                        if (mSwiping) {
-                            v.setTranslationX((x - mDownX));
-                            v.setAlpha(1 - deltaXAbs / v.getWidth());
+                        if (dragging) {
+                            v.setTranslationX((x - pressX));
+                            v.setAlpha(1 - Math.abs(deltaX) / v.getWidth());
                         }
                     }
                     break;
 
                     case MotionEvent.ACTION_UP:
                     {
-                        if (mSwiping) {
+                        if (dragging) {
                             float x = event.getX() + v.getTranslationX();
-                            float deltaX = x - mDownX;
-                            float deltaXAbs = Math.abs(deltaX);
-
+                            float deltaX = x - pressX;
                             // Si voy mas alla que lo deseado el elemento se borra
-                            if (deltaXAbs > v.getWidth() / 4) {
+                            if (Math.abs(deltaX) > v.getWidth() / 4) {
                                 mContainerView.invalidate();
                                 v.animate().setDuration(TIME_ANIM).translationX(1000).alphaBy(0);
                                 mContainerView.removeView(v);
                             } else {
                                 v.animate().setDuration(TIME_ANIM).translationX(0);
-                                mSwiping = false;
+                                dragging = false;
                             }
                         }
-                        mItemPressed = false;
+                        itemPress = false;
                     }
                     break;
                 }
@@ -122,9 +119,7 @@ public class MainActivity extends ActionBarActivity {
         newView.setOnTouchListener(mTouchListener);
         mContainerView.addView(newView, 0);
     }
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -137,7 +132,7 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
-    private static final String[] COUNTRIES = new String[]{
+    private static final String[] PASS = new String[]{
             "Banco provincial", "Hotmail", "Gmail", "Banco de Venezuela", "Facebook",
             "Twitter", "Instagram", "Ubuntu one", "Amazon", "SASE",
             "PC",
