@@ -18,11 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+// Actividad para el manejo de los ontouch
 public class MainActivity extends ActionBarActivity {
     private ViewGroup mContainerView;
     private static ScrollView scroll;
     private final int TIME_ANIM = 150;
-    private Resources res;
     private String[] colors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mContainerView = (ViewGroup) findViewById(R.id.container);
         scroll = (ScrollView) findViewById(R.id.scroll);
-        res = getResources();
        colors = new String[]{
                 getResources().getString(R.string.purple),getResources().getString(R.string.green),
                 getResources().getString(R.string.blue),getResources().getString(R.string.red),
