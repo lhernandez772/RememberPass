@@ -22,5 +22,15 @@
     <string name="action_delete_menu">Eliminar tarjeta</string>
     <string name="action_settings">Settings</string>
 
+    <!--
+    Colores
+    -->
+    <string name="green">#99CC00</string>
+    <string name="dark_green">#669900</string>
+    <string name="blue">#33B5E5</string>
+    <string name="dark_blue">#0099CC</string>
+    <string name="purple">#AA66CC</string>
+    <string name="yellow">#FFBB33</string>
+    <string name="red">#FF4444</string>
 
 </resources>

@@ -13,8 +13,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:paddingLeft="9dp"
-            android:paddingRight="9dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <LinearLayout android:id="@+id/container"
                 android:background="#e8e8e8"
@@ -37,7 +37,7 @@
         android:layout_gravity="center"
         android:padding="32dp"
         android:textSize="20dp"
-        android:text="@string/no_pass"
+        android:text=""
         android:textColor="?android:textColorSecondary" />
 
 </FrameLayout>

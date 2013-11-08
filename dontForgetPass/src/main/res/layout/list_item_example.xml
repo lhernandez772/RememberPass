@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginTop="4dp"
+    android:layout_height="125dp"
+    android:layout_marginTop="6dp"
     android:orientation="vertical"
     android:background="#ffffff">
 
@@ -9,22 +10,30 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
         <TextView android:id="@android:id/text1"
-            android:textSize="19sp"
+            android:textSize="20sp"
             android:textStyle="normal"
-            android:fontFamily="sans-serif-normal"
+            android:fontFamily="sans-serif-bold"
             android:layout_width="match_parent"
             android:text="Probando"
-            android:textColor="#666666"
+            android:textColor="#333333"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content" />
+        <ImageButton
+            android:background="@null"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_edit"
+            android:layout_marginRight="15dp"
+            android:layout_alignTop="@android:id/text1"
+            android:layout_alignRight="@android:id/text1" />
     </RelativeLayout>
 
     <TextView android:id="@android:id/text2"
         android:textSize="13sp"
         android:textColor="#333333"
         android:textStyle="normal"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-normal"
         android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:text="@string/txt_user_test"
@@ -36,7 +45,7 @@
         android:textSize="13sp"
         android:textColor="#333333"
         android:textStyle="normal"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-normal"
         android:layout_width="match_parent"
         android:layout_marginTop="4dp"
         android:text="@string/txt_pass_test"
@@ -49,13 +58,14 @@
         android:textSize="13sp"
         android:textColor="#333333"
         android:textStyle="normal"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-normal"
         android:layout_width="match_parent"
         android:layout_marginTop="4dp"
         android:text="@string/txt_create_at"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         />
+
 
 
 

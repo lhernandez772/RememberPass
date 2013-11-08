@@ -1,5 +1,9 @@
 package com.example.dontforgetpass;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -17,12 +22,22 @@ public class MainActivity extends ActionBarActivity {
     private ViewGroup mContainerView;
     private static ScrollView scroll;
     private final int TIME_ANIM = 150;
+    private Resources res;
+    private String[] colors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContainerView = (ViewGroup) findViewById(R.id.container);
         scroll = (ScrollView) findViewById(R.id.scroll);
+        res = getResources();
+       colors = new String[]{
+                getResources().getString(R.string.purple),getResources().getString(R.string.green),
+                getResources().getString(R.string.blue),getResources().getString(R.string.red),
+        };
+        for (int i = 0; i<30; i++) {
+            addItem();
+        }
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -58,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
             private int swipe = -1;
             float pressX = 0;
             boolean itemPress = false, dragging = false;
+            @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //Variables del Ontouch
@@ -117,6 +133,8 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         newView.setOnTouchListener(mTouchListener);
+        LinearLayout l = (LinearLayout)newView.findViewById(R.id.item);
+        l.setBackgroundColor(Color.parseColor(colors[(int) (Math.random() * colors.length)]));
         mContainerView.addView(newView, 0);
     }
 
