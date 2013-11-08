@@ -37,7 +37,7 @@
         android:layout_gravity="center"
         android:padding="32dp"
         android:textSize="20dp"
-        android:text=""
+        android:text="@string/no_pass"
         android:textColor="?android:textColorSecondary" />
 
 </FrameLayout>
