@@ -6,7 +6,7 @@
     <!--
     TextViews
     -->
-    <string name="no_pass">You have not added any password</string>
+    <string name="no_pass"></string>
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="txt_user_test">Usuario lhernandez@4geeks.com.ve</string>
@@ -22,15 +22,15 @@
     <string name="action_delete_menu">Eliminar tarjeta</string>
     <string name="action_settings">Settings</string>
 
-    <!--
-    Colores
-    -->
-    <string name="green">#99CC00</string>
-    <string name="dark_green">#669900</string>
-    <string name="blue">#33B5E5</string>
-    <string name="dark_blue">#0099CC</string>
-    <string name="purple">#AA66CC</string>
-    <string name="yellow">#FFBB33</string>
-    <string name="red">#FF4444</string>
+    <!-- Colors -->
+    <string-array
+        name="colorsArray">
+        <item>#8AD5F0</item> <!--ligth blue-->
+        <item>#DDBCEE</item> <!--ligth purple-->
+        <item>#FFAFAF</item> <!--ligth red-->
+        <item>#FFD980</item> <!--ligth yellow-->
+        <item>#C5E26D</item> <!--ligth green-->
+    </string-array>
+
 
 </resources>

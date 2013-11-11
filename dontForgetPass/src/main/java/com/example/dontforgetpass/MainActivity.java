@@ -1,7 +1,7 @@
 package com.example.dontforgetpass;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
@@ -18,7 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-// Actividad para el manejo de los ontouch
+import static com.example.dontforgetpass.UserPasswordContract.*;
+
 public class MainActivity extends ActionBarActivity {
     private ViewGroup mContainerView;
     private static ScrollView scroll;
@@ -30,10 +31,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mContainerView = (ViewGroup) findViewById(R.id.container);
         scroll = (ScrollView) findViewById(R.id.scroll);
-       colors = new String[]{
-                getResources().getString(R.string.purple),getResources().getString(R.string.green),
-                getResources().getString(R.string.blue),getResources().getString(R.string.red),
-        };
+        colors = getResources().getStringArray(R.array.colorsArray);
         for (int i = 0; i<30; i++) {
             addItem();
         }
@@ -55,7 +53,9 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_item:
-                addItem();
+                Intent intent = new Intent(this,NewPasswordActivity.class);
+                startActivity(intent);
+                //addItem();
                 findViewById(android.R.id.empty).setVisibility(View.GONE);
                 return true;
         }
@@ -75,7 +75,6 @@ public class MainActivity extends ActionBarActivity {
             @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //Variables del Ontouch
                 if (swipe < 0)
                     swipe = ViewConfiguration.get(c).getScaledTouchSlop();
                 switch (event.getAction()) {
@@ -119,6 +118,7 @@ public class MainActivity extends ActionBarActivity {
                                 v.animate().setDuration(TIME_ANIM).translationX(1000).alphaBy(0);
                                 mContainerView.removeView(v);
                             } else {
+                                v.setAlpha(1);
                                 v.animate().setDuration(TIME_ANIM).translationX(0);
                                 dragging = false;
                             }
@@ -138,10 +138,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
+        public PlaceholderFragment() {}
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
