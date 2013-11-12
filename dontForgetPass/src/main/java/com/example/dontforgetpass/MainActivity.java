@@ -148,7 +148,7 @@ public class MainActivity extends ActionBarActivity {
     }
     private static final String[] PASS = new String[]{
             "Banco provincial", "Hotmail", "Gmail", "Banco de Venezuela", "Facebook",
-            "Twitter", "Instagram", "Ubuntu one", "Amazon", "SASE",
+            "Twitter", "Instagram", "Ubuntu one", "Amazon", "Sisitema de inscripcion ",
             "PC",
     };
 

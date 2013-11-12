@@ -5,15 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class NewPasswordActivity extends ActionBarActivity {
-    private UserPasswordContract.PasswordsDBHelper mDbhelper = null;
+    private EditText title;
+    private EditText username;
+    private EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDbhelper = new UserPasswordContract().new PasswordsDBHelper(getBaseContext());
         setContentView(R.layout.activity_new_password);
+        this.title = (EditText) findViewById(R.id.edit_text_title);
+        this.username = (EditText) findViewById(R.id.edit_text_username);
+        this.password = (EditText) findViewById(R.id.edit_text_password);
     }
 
     @Override
@@ -27,19 +32,10 @@ public class NewPasswordActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.done:
-                SQLiteDatabase db = mDbhelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put(UserPasswordContract.PasswordEntry.COLUMN_NAME_SITE, "Titulo");
-                values.put(UserPasswordContract.PasswordEntry.COLUMN_NAME_USERNAME, "luish000");
-                values.put(UserPasswordContract.PasswordEntry.COLUMN_NAME_PASSWORD, "19419772");
-                long newRowId;
-                newRowId = db.insert(
-                        UserPasswordContract.PasswordEntry.TABLE_NAME,
-                        null,
-                        values);
-
-                Toast toast = Toast.makeText(getApplicationContext(),Long.toString(newRowId), Toast.LENGTH_LONG);
-                toast.show();
+                Password pw = new Password(
+                       this.title.getText().toString(),this.username.getText().toString(),
+                       this.password.getText().toString());
+                new WritableDbTask(getBaseContext()).execute(pw);
                 break;
         }
         return super.onOptionsItemSelected(item);

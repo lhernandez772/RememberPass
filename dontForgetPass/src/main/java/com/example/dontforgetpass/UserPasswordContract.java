@@ -14,14 +14,16 @@ public class UserPasswordContract {
                     PasswordEntry._ID + " INTEGER PRIMARY KEY," +
                     PasswordEntry.COLUMN_NAME_SITE + TEXT_TYPE + COMMA_SEP +
                     PasswordEntry.COLUMN_NAME_USERNAME + TEXT_TYPE + COMMA_SEP +
-                    PasswordEntry.COLUMN_NAME_PASSWORD +" )";
+                    PasswordEntry.COLUMN_NAME_PASSWORD +
+                    PasswordEntry.COLUMN_NAME_COLOR +
+                    " )";
     private static final String SQL_DELETE_PASSWORD =
             "DROP TABLE IF EXISTS " + PasswordEntry.TABLE_NAME;
 
 
     //Helper for the SQLite Data Base
     public class PasswordsDBHelper extends SQLiteOpenHelper  {
-        public static final int DATABASE_VERSION = 1;
+        public static final int DATABASE_VERSION = 2;
         public static final String DATABASE_NAME = "Passwords.db";
 
         public PasswordsDBHelper (Context context) {
@@ -48,5 +50,6 @@ public class UserPasswordContract {
         public static final String COLUMN_NAME_SITE = "site";
         public static final String COLUMN_NAME_USERNAME = "username";
         public static final String COLUMN_NAME_PASSWORD = "password";
+        public static final String COLUMN_NAME_COLOR = "color";
     }
 }

@@ -25,11 +25,13 @@
     <!-- Colors -->
     <string-array
         name="colorsArray">
-        <item>#8AD5F0</item> <!--ligth blue-->
-        <item>#DDBCEE</item> <!--ligth purple-->
-        <item>#FFAFAF</item> <!--ligth red-->
         <item>#FFD980</item> <!--ligth yellow-->
         <item>#C5E26D</item> <!--ligth green-->
+        <item>#B99CC2</item> <!--purple-->
+        <item>#50C0E9</item> <!--blue-->
+        <item>#FF7979</item>
+
+
     </string-array>
 
 
